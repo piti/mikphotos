@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mik — Airy & Friendly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@1,9..144,400..600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B3358; --navy-soft:#2A4A78; --powder:#BCD4E6; --powder-200:#D9E8F2;
+  --powder-50:#EEF5FA; --cream:#FBFCFE; --ink:#2B3A4D; --accent:#F2A65A;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:'Outfit',sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:'Outfit',sans-serif;font-weight:600;letter-spacing:-.02em;color:var(--navy);line-height:1.05}
+.script{font-family:'Fraunces',serif;font-style:italic;font-weight:500}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+.kick{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--navy-soft);font-weight:500;opacity:.7}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(251,252,254,.85);backdrop-filter:blur(12px)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:80px}
+.brand{font-size:24px;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:9px}
+.dot{width:11px;height:11px;border-radius:50%;background:var(--accent)}
+.navlinks{display:flex;gap:34px;align-items:center;font-size:15px;font-weight:500}
+.navlinks a{color:var(--ink);opacity:.75;transition:.25s}.navlinks a:hover{opacity:1;color:var(--navy)}
+.book-btn{background:var(--navy);color:#fff!important;padding:11px 24px;border-radius:40px;opacity:1!important;transition:.3s}
+.book-btn:hover{background:var(--navy-soft);transform:translateY(-2px);box-shadow:0 10px 24px rgba(27,51,88,.2)}
+@media(max-width:820px){.navlinks a:not(.book-btn){display:none}}
+
+/* hero */
+header{padding:140px 0 80px;position:relative}
+header::before{content:"";position:absolute;top:-120px;right:-120px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,var(--powder-200),transparent 68%);z-index:-1;opacity:.7}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(46px,7vw,82px)}
+.hero h1 .script{color:var(--accent);display:inline-block}
+.hero p{margin:26px 0 34px;font-size:19px;max-width:430px;opacity:.82}
+.hero-cta{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.btn{background:var(--navy);color:#fff;padding:15px 32px;border-radius:40px;font-weight:500;transition:.3s}
+.btn:hover{background:var(--navy-soft);transform:translateY(-2px);box-shadow:0 12px 30px rgba(27,51,88,.22)}
+.btn-soft{background:var(--powder-50);color:var(--navy);padding:15px 28px;border-radius:40px;font-weight:500;transition:.3s}
+.btn-soft:hover{background:var(--powder-200)}
+.hero-imgs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.hero-imgs figure{border-radius:22px;overflow:hidden;box-shadow:0 20px 50px rgba(27,51,88,.14)}
+.hero-imgs figure:nth-child(1){aspect-ratio:3/4;margin-top:30px}
+.hero-imgs figure:nth-child(2){aspect-ratio:3/4;margin-bottom:30px}
+@media(max-width:860px){.hero{grid-template-columns:1fr;gap:36px}}
+
+/* trust strip */
+.trust{display:flex;gap:50px;flex-wrap:wrap;justify-content:center;padding:34px 0;margin-top:30px;border-top:1px solid var(--powder-200);border-bottom:1px solid var(--powder-200)}
+.trust div{text-align:center}
+.trust .n{font-size:32px;font-weight:700;color:var(--navy)}
+.trust .l{font-size:14px;opacity:.7}
+
+section{padding:90px 0}
+.center{text-align:center;max-width:620px;margin:0 auto 56px}
+.center h2{font-size:clamp(32px,5vw,52px);margin:14px 0}
+.center p{font-size:18px;opacity:.78}
+
+/* gallery */
+.cats{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:38px}
+.cats button{font-family:'Outfit';background:var(--cream);border:1.5px solid var(--powder-200);color:var(--navy);padding:10px 22px;border-radius:40px;font-size:14px;font-weight:500;cursor:pointer;transition:.25s}
+.cats button.on,.cats button:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+.gal{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:16px}
+.gal figure{border-radius:18px;overflow:hidden;position:relative;box-shadow:0 8px 26px rgba(27,51,88,.08)}
+.gal figure img{transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.gal figure:hover img{transform:scale(1.07)}
+.gal figcaption{position:absolute;inset:auto 0 0 0;padding:16px;background:linear-gradient(transparent,rgba(27,51,88,.78));color:#fff;font-weight:500;font-size:15px;opacity:0;transition:.35s}
+.gal figure:hover figcaption{opacity:1}
+.t2{grid-row:span 2}.c2{grid-column:span 2}
+@media(max-width:820px){.gal{grid-template-columns:repeat(2,1fr)}.c2{grid-column:span 2}}
+
+/* about */
+.about{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:center;background:var(--powder-50);border-radius:30px;padding:56px}
+.about-img{aspect-ratio:1;border-radius:24px;overflow:hidden;box-shadow:0 20px 50px rgba(27,51,88,.16)}
+.about h2{font-size:clamp(30px,4.5vw,48px);margin-bottom:20px}
+.about p{font-size:18px;opacity:.82;margin-bottom:16px;max-width:520px}
+.about .script{font-size:24px;color:var(--accent)}
+@media(max-width:860px){.about{grid-template-columns:1fr;padding:36px;gap:32px}}
+
+/* packages */
+.pkgs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.pkg{background:#fff;border:1.5px solid var(--powder-200);border-radius:24px;padding:38px 32px;transition:.3s}
+.pkg:hover{transform:translateY(-6px);box-shadow:0 24px 50px rgba(27,51,88,.13);border-color:var(--powder)}
+.pkg.feat{background:var(--navy);color:#fff;border-color:var(--navy)}
+.pkg.feat h3,.pkg.feat .price{color:#fff}
+.pkg .tag{display:inline-block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--navy-soft);background:var(--powder-50);padding:5px 12px;border-radius:20px}
+.pkg.feat .tag{background:var(--accent);color:var(--navy)}
+.pkg h3{font-size:24px;margin:16px 0 4px}
+.pkg .price{font-size:44px;font-weight:700;color:var(--navy);margin:10px 0 20px}
+.pkg .price span{font-size:15px;font-weight:400;opacity:.6}
+.pkg ul{list-style:none}.pkg li{padding:10px 0;border-top:1px solid var(--powder-200);font-size:15px;opacity:.9;display:flex;gap:10px}
+.pkg li::before{content:"✓";color:var(--accent);font-weight:700}
+.pkg.feat li{border-color:rgba(255,255,255,.16)}.pkg.feat li::before{color:var(--powder)}
+
+/* booking */
+.book{background:linear-gradient(160deg,var(--powder-200),var(--powder-50));border-radius:30px;padding:64px;text-align:center}
+.book h2{font-size:clamp(32px,5vw,56px);margin-bottom:14px}
+.book p{font-size:18px;opacity:.8;max-width:460px;margin:0 auto 32px}
+.book-embed{background:#fff;border:2px dashed var(--powder);border-radius:18px;padding:46px;color:var(--navy-soft);font-style:italic;font-family:'Fraunces',serif;margin-bottom:28px}
+
+footer{padding:70px 0 50px}
+.foot{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;border-top:1px solid var(--powder-200);padding-top:50px}
+.foot .brand{font-size:34px}
+.social{display:flex;gap:22px;font-size:15px;font-weight:500;opacity:.75}
+.social a:hover{color:var(--navy);opacity:1}
+.foot small{width:100%;opacity:.5;font-size:13px;margin-top:26px}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s,transform .9s}.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <div class="brand"><span class="dot"></span>Mik Photos</div>
+  <div class="navlinks">
+    <a href="#work">Work</a><a href="#about">About</a><a href="#packages">Packages</a>
+    <a href="#book" class="book-btn">Book a session</a>
+  </div>
+</div></nav>
+
+<header><div class="wrap hero">
+  <div>
+    <div class="kick">Outdoor photography · Friendly &amp; easy</div>
+    <h1>Real moments,<br><span class="script">beautiful</span> light.</h1>
+    <p>Hi! I'm Mik — I photograph people and the outdoors in natural light. Relaxed sessions on location, and a gallery you'll actually want to print.</p>
+    <div class="hero-cta">
+      <a href="#book" class="btn">Book a session</a>
+      <a href="#work" class="btn-soft">See my work →</a>
+    </div>
+  </div>
+  <div class="hero-imgs">
+    <figure><img src="https://picsum.photos/seed/airy1/600/800"></figure>
+    <figure><img src="https://picsum.photos/seed/airy2/600/800"></figure>
+  </div>
+</div>
+<div class="wrap"><div class="trust">
+  <div><div class="n">100%</div><div class="l">Natural light</div></div>
+  <div><div class="n">48 hrs</div><div class="l">Gallery delivery</div></div>
+  <div><div class="n">On location</div><div class="l">You pick the spot</div></div>
+  <div><div class="n">All ages</div><div class="l">Seniors · families · events</div></div>
+</div></div></header>
+
+<section id="work"><div class="wrap">
+  <div class="center"><div class="kick">My work</div><h2>A few favorites</h2><p>Portraits, nature and everything in between — all shot outside in real light.</p></div>
+  <div class="cats"><button class="on">All</button><button>Portraits</button><button>Outdoor &amp; Nature</button><button>Events</button></div>
+  <div class="gal">
+    <figure class="t2"><img src="https://picsum.photos/seed/ag1/600/800"><figcaption>Golden hour, riverbank</figcaption></figure>
+    <figure class="c2"><img src="https://picsum.photos/seed/ag2/800/420"><figcaption>Ridge line at dusk</figcaption></figure>
+    <figure><img src="https://picsum.photos/seed/ag3/420/420"><figcaption>Pine detail</figcaption></figure>
+    <figure><img src="https://picsum.photos/seed/ag4/420/420"><figcaption>Senior session</figcaption></figure>
+    <figure class="c2"><img src="https://picsum.photos/seed/ag5/800/420"><figcaption>Lake morning</figcaption></figure>
+    <figure class="t2"><img src="https://picsum.photos/seed/ag6/600/800"><figcaption>Window light</figcaption></figure>
+    <figure><img src="https://picsum.photos/seed/ag7/420/420"><figcaption>Field meet</figcaption></figure>
+    <figure><img src="https://picsum.photos/seed/ag8/420/420"><figcaption>Trailhead</figcaption></figure>
+  </div>
+</div></section>
+
+<section><div class="wrap about">
+  <div class="about-img"><img src="https://picsum.photos/seed/airyself/800/800"></div>
+  <div>
+    <div class="kick">About me</div>
+    <h2>Hi, I'm Mik 👋</h2>
+    <p>I'm an outdoor photographer who loves catching people being themselves. No awkward studio poses — just a fun, relaxed session somewhere with good light and good vibes.</p>
+    <p>I shoot senior portraits, families, outdoor adventures and local events, then get you a polished gallery within a couple of days.</p>
+    <div class="script">Can't wait to shoot with you!</div>
+  </div>
+</div></section>
+
+<section id="packages"><div class="wrap">
+  <div class="center"><div class="kick">Sessions</div><h2>Simple, friendly pricing</h2><p>Pick the one that fits — and reach out if you want something custom.</p></div>
+  <div class="pkgs">
+    <div class="pkg"><span class="tag">Mini</span><h3>The Quick One</h3><div class="price">$95<span>/session</span></div>
+      <ul><li>30 minutes, one location</li><li>15+ edited photos</li><li>Online gallery</li><li>Print-ready files</li></ul></div>
+    <div class="pkg feat"><span class="tag">Most booked</span><h3>The Session</h3><div class="price">$165<span>/session</span></div>
+      <ul><li>60 minutes, up to 2 people</li><li>40+ edited photos</li><li>Gallery + downloads</li><li>Outfit &amp; location guide</li></ul></div>
+    <div class="pkg"><span class="tag">Event</span><h3>On Location</h3><div class="price">$240<span>+</span></div>
+      <ul><li>2 hours coverage</li><li>80+ edited photos</li><li>48hr turnaround</li><li>Custom for your event</li></ul></div>
+  </div>
+</div></section>
+
+<section id="book"><div class="wrap">
+  <div class="book">
+    <div class="kick">Let's shoot</div>
+    <h2>Book a session</h2>
+    <p>Pick a time that works for you and I'll confirm the spot &amp; the light. Easy as that.</p>
+    <div class="book-embed">[ Booking calendar embeds here — Cal.diy / TidyCal ]</div>
+    <a href="#" class="btn">Check availability</a>
+  </div>
+</div></section>
+
+<footer><div class="wrap foot">
+  <div class="brand"><span class="dot"></span>Mik Photos</div>
+  <div class="social"><a href="#">Instagram</a><a href="#">Email</a><a href="#">TikTok</a></div>
+  <small>© 2026 Mik Photography · Outdoor photography, natural light · Mockup C — Airy &amp; Friendly</small>
+</div></footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.1});
+document.querySelectorAll('section .wrap>*, .gal figure, .pkg').forEach((el,i)=>{el.classList.add('reveal');el.style.transitionDelay=(i%5*70)+'ms';io.observe(el)});
+document.querySelectorAll('.cats button').forEach(b=>b.onclick=()=>{document.querySelector('.cats .on').classList.remove('on');b.classList.add('on')});
+</script>
+</body>
+</html>
