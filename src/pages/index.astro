@@ -15,12 +15,19 @@ const gallery = photos.map((p) => ({ ...p, img: byName[p.src] }));
 const catLabels = { all: 'All', portraits: 'Portraits', outdoor: 'Outdoor & Nature' };
 const cats = ['all', ...Array.from(new Set(photos.map((p) => p.category)))];
 
-const included = [
-  'Each person gets their own individual portraits',
-  'Plus shots together for couples, friends & family',
-  'Hand-edited photos delivered in an online gallery',
-  'Natural light — golden hour is the sweet spot',
+const priceRows = [
+  { p: '$30', l: 'solo · 30 minutes' },
+  { p: '$50', l: 'two people · 45 minutes' },
+  { p: '+$20', l: 'each additional person' },
 ];
+const included = [
+  'Natural light, styled in-camera — delivered ready to share',
+  'Online gallery; extra editing or retouching on request',
+];
+
+// TidyCal booking path "username/booking-slug" — set once Mik's TidyCal booking
+// type is live (with his availability + optional pre-paid). Empty = show fallback.
+const tidycalPath = '';
 const notes = [
   { h: 'Location', body: 'Default spot is <b>Cohn Park, Folsom</b>. Want somewhere else? Just <b>+$10</b>.' },
   { h: 'Groups of 5+', body: '<b>Message me</b> and we’ll plan a longer slot so no one feels rushed.' },
@@ -100,8 +107,12 @@ const notes = [
   <div class="price-wrap">
     <div class="price-card">
       <div class="tag">The Session</div>
-      <div class="big-price">$25<span>/ person</span></div>
-      <p class="price-sub">30-minute solo sessions · 45 minutes for two or more · outdoors at Cohn Park, Folsom.</p>
+      <div class="price-rows">
+        {priceRows.map((r) => (
+          <div class="prow"><span class="pp">{r.p}</span><span class="pl">{r.l}</span></div>
+        ))}
+      </div>
+      <p class="price-sub">Outdoors at Cohn Park, Folsom. Everyone gets their own individual portraits, plus shots together.</p>
       <ul>{included.map((it) => <li>{it}</li>)}</ul>
       <a href="#book" class="btn-primary">Book a session →</a>
     </div>
@@ -118,11 +129,14 @@ const notes = [
     <div class="kick" style="opacity:.9">04 / Let's shoot</div>
     <h2>Book a session</h2>
     <p>Grab a time and I'll lock in the spot &amp; the light. Sessions run year-round, weather permitting.</p>
-    {/* Booking embed slot — drop the TidyCal (or Cal.diy) embed snippet inside this block. */}
-    <div class="book-embed" id="booking">
-      <span>Booking calendar goes here — TidyCal embed</span>
-    </div>
-    <a href="#" class="btn-primary" id="book-cta">Check availability →</a>
+    {tidycalPath ? (
+      <div class="tidycal-embed" data-path={tidycalPath}></div>
+    ) : (
+      <>
+        <div class="book-embed" id="booking"><span>Online booking is coming soon — for now, message me to grab a time.</span></div>
+        <a href="https://www.instagram.com/miktakesflicks" target="_blank" rel="noopener" class="btn-primary">Message me to book →</a>
+      </>
+    )}
   </div>
 </div></section>
 
@@ -131,6 +145,8 @@ const notes = [
   <div class="social"><a href="https://www.instagram.com/miktakesflicks" target="_blank" rel="noopener">Instagram ↗ @miktakesflicks</a></div>
   <small>© 2026 Mik Photography · Outdoor &amp; portrait photography · Built with Astro</small>
 </div></footer>
+
+{tidycalPath && <script is:inline async src="https://asset-tidycal.b-cdn.net/js/embed.js"></script>}
 
 <script>
   // Sticky nav background
@@ -246,8 +262,11 @@ section{padding:110px 0;position:relative}
 .price-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:stretch}
 .price-card{background:linear-gradient(160deg,var(--powder),#8fbfe0);color:var(--navy-deep);border-radius:20px;padding:46px 42px;display:flex;flex-direction:column}
 .price-card .tag{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--navy-mid)}
-.big-price{font-family:'Bricolage Grotesque';font-weight:700;font-size:clamp(56px,9vw,84px);line-height:1;color:var(--navy-deep);margin:10px 0 6px}
-.big-price span{font-size:22px;font-weight:500;opacity:.65;margin-left:6px}
+.price-rows{margin:14px 0 6px}
+.prow{display:flex;align-items:baseline;gap:16px;padding:12px 0;border-top:1px solid rgba(11,23,48,.16)}
+.prow:first-child{border-top:none;padding-top:4px}
+.pp{font-family:'Bricolage Grotesque';font-weight:700;font-size:clamp(34px,5vw,42px);line-height:1;color:var(--navy-deep);min-width:104px}
+.pl{font-size:16px;color:var(--navy-mid)}
 .price-sub{font-size:16px;color:var(--navy-mid);margin-bottom:24px;max-width:430px}
 .price-card ul{list-style:none;margin-bottom:30px}
 .price-card li{padding:12px 0;border-top:1px solid rgba(11,23,48,.16);font-size:16px;color:var(--navy-mid);position:relative;padding-left:24px}
@@ -266,6 +285,7 @@ section{padding:110px 0;position:relative}
 .book h2{font-size:clamp(38px,6vw,76px);color:#fff;margin-bottom:18px}
 .book p{color:var(--muted);max-width:480px;margin:0 auto 34px;font-size:18px}
 .book-embed{background:rgba(167,204,230,.05);border:1px dashed rgba(167,204,230,.4);border-radius:14px;padding:46px;color:var(--powder);font-family:'Bricolage Grotesque';font-weight:300;margin-bottom:30px}
+.tidycal-embed{min-height:540px;background:rgba(167,204,230,.04);border-radius:14px;margin-bottom:8px;overflow:hidden}
 @media(max-width:680px){.book{padding:44px 26px}}
 
 footer{padding:80px 0 50px;border-top:1px solid rgba(167,204,230,.16)}
