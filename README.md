@@ -3,9 +3,9 @@
 Website for Mik's outdoor & portrait photography business. Custom-built in **Astro**,
 navy + powder-blue brand ("Bold Navy" design direction).
 
-- **Code** lives here in `~/dev/mikphotos`, deployed via GitHub Actions → GitHub Pages.
+- **Code** lives here in `~/dev/mikphotos`, deployed via GitHub Actions → GitHub Pages on the custom domain miktakesflicks.online.
 - **Research / decisions / dispatch** live in the vault at `~/vault/projects/mikphotos`.
-- **Live:** https://piti.github.io/mikphotos/
+- **Live:** https://miktakesflicks.online
 
 ## Stack
 

@@ -45,6 +45,15 @@ const notes = [
 <link rel="icon" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.svg`} type="image/svg+xml" />
 <link rel="apple-touch-icon" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/apple-touch-icon.png`} />
 <meta name="theme-color" content="#0B1730" />
+<link rel="canonical" href={Astro.site} />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Mik Photography — Outdoor & Portrait Photography" />
+<meta property="og:description" content="Outdoor & portrait photography in natural light, around Folsom. Book a session with Mik." />
+<meta property="og:url" content={Astro.site} />
+<meta property="og:image" content={new URL('og.jpg', Astro.site)} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Mik Photography" />
+<meta name="twitter:image" content={new URL('og.jpg', Astro.site)} />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
