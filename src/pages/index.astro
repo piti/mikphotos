@@ -15,13 +15,16 @@ const gallery = photos.map((p) => ({ ...p, img: byName[p.src] }));
 const catLabels = { all: 'All', portraits: 'Portraits', outdoor: 'Outdoor & Nature' };
 const cats = ['all', ...Array.from(new Set(photos.map((p) => p.category)))];
 
-const packages = [
-  { tag: 'Mini', name: 'The Quick One', price: '$95', unit: '/session', feat: false,
-    items: ['30 minutes, one location', '15+ edited photos', 'Online gallery', 'Print-ready files'] },
-  { tag: 'Most booked', name: 'The Session', price: '$165', unit: '/session', feat: true,
-    items: ['60 minutes, up to 2 people', '40+ edited photos', 'Gallery + downloads', 'Outfit & location guide'] },
-  { tag: 'Event', name: 'On Location', price: '$240', unit: '+', feat: false,
-    items: ['2 hours coverage', '80+ edited photos', '48hr turnaround', 'Custom for your event'] },
+const included = [
+  'Each person gets their own individual portraits',
+  'Plus shots together for couples, friends & family',
+  'Hand-edited photos delivered in an online gallery',
+  'Natural light — golden hour is the sweet spot',
+];
+const notes = [
+  { h: 'Location', body: 'Default spot is <b>Cohn Park, Folsom</b>. Want somewhere else? Just <b>+$10</b>.' },
+  { h: 'Groups of 5+', body: '<b>Message me</b> and we’ll plan a longer slot so no one feels rushed.' },
+  { h: 'Mini-session days', body: 'Golden-hour group bookings at the park — ask about upcoming dates.' },
 ];
 ---
 <!doctype html>
@@ -93,16 +96,20 @@ const packages = [
 </div></section>
 
 <section id="packages"><div class="wrap">
-  <div class="shead"><div class="kick">03 / Sessions</div><h2>Pick your session</h2></div>
-  <div class="pkgs">
-    {packages.map((p) => (
-      <div class={`pkg${p.feat ? ' feat' : ''}`}>
-        <div class="tag">{p.tag}</div>
-        <h3>{p.name}</h3>
-        <div class="price">{p.price}<span>{p.unit}</span></div>
-        <ul>{p.items.map((it) => <li>{it}</li>)}</ul>
-      </div>
-    ))}
+  <div class="shead"><div class="kick">03 / Sessions</div><h2>Simple, friendly pricing</h2></div>
+  <div class="price-wrap">
+    <div class="price-card">
+      <div class="tag">The Session</div>
+      <div class="big-price">$25<span>/ person</span></div>
+      <p class="price-sub">30-minute solo sessions · 45 minutes for two or more · outdoors at Cohn Park, Folsom.</p>
+      <ul>{included.map((it) => <li>{it}</li>)}</ul>
+      <a href="#book" class="btn-primary">Book a session →</a>
+    </div>
+    <div class="price-notes">
+      {notes.map((n) => (
+        <div class="note-tile"><div class="nt-h">{n.h}</div><p set:html={n.body}></p></div>
+      ))}
+    </div>
   </div>
 </div></section>
 
@@ -236,19 +243,24 @@ section{padding:110px 0;position:relative}
 .about .powder{color:var(--powder-bright)}
 @media(max-width:860px){.about{grid-template-columns:1fr}}
 
-.pkgs{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.pkg{background:linear-gradient(160deg,rgba(30,52,97,.5),rgba(11,23,48,.3));border:1px solid rgba(167,204,230,.18);border-radius:18px;padding:38px 32px;transition:.35s}
-.pkg:hover{transform:translateY(-6px);border-color:var(--powder);box-shadow:0 24px 60px rgba(0,0,0,.4)}
-.pkg.feat{background:linear-gradient(160deg,var(--powder),#8fbfe0);color:var(--navy-deep)}
-.pkg .tag{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--powder-bright)}
-.pkg.feat .tag{color:var(--navy-mid)}
-.pkg h3{font-size:26px;color:#fff;margin:10px 0 6px}.pkg.feat h3{color:var(--navy-deep)}
-.pkg .price{font-family:'Bricolage Grotesque';font-size:48px;font-weight:700;color:var(--powder-bright);margin:14px 0 22px}
-.pkg.feat .price{color:var(--navy-deep)}
-.pkg .price span{font-size:15px;font-family:'Hanken Grotesk';opacity:.6}
-.pkg ul{list-style:none}.pkg li{padding:10px 0;border-top:1px solid rgba(167,204,230,.16);font-size:15px;color:var(--paper)}
-.pkg.feat li{color:var(--navy-mid);border-color:rgba(11,23,48,.14)}
-@media(max-width:860px){.pkgs{grid-template-columns:1fr}}
+.price-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:stretch}
+.price-card{background:linear-gradient(160deg,var(--powder),#8fbfe0);color:var(--navy-deep);border-radius:20px;padding:46px 42px;display:flex;flex-direction:column}
+.price-card .tag{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--navy-mid)}
+.big-price{font-family:'Bricolage Grotesque';font-weight:700;font-size:clamp(56px,9vw,84px);line-height:1;color:var(--navy-deep);margin:10px 0 6px}
+.big-price span{font-size:22px;font-weight:500;opacity:.65;margin-left:6px}
+.price-sub{font-size:16px;color:var(--navy-mid);margin-bottom:24px;max-width:430px}
+.price-card ul{list-style:none;margin-bottom:30px}
+.price-card li{padding:12px 0;border-top:1px solid rgba(11,23,48,.16);font-size:16px;color:var(--navy-mid);position:relative;padding-left:24px}
+.price-card li::before{content:"✦";position:absolute;left:0;color:var(--navy-deep);opacity:.5}
+.price-card .btn-primary{background:var(--navy-deep);color:var(--powder);align-self:flex-start;margin-top:auto}
+.price-card .btn-primary:hover{background:var(--navy-mid);color:#fff;box-shadow:0 14px 40px rgba(11,23,48,.3)}
+.price-notes{display:flex;flex-direction:column;gap:16px}
+.note-tile{background:linear-gradient(160deg,rgba(30,52,97,.5),rgba(11,23,48,.3));border:1px solid rgba(167,204,230,.18);border-radius:16px;padding:24px 28px;flex:1;display:flex;flex-direction:column;justify-content:center;transition:.3s}
+.note-tile:hover{border-color:var(--powder);transform:translateY(-3px)}
+.note-tile .nt-h{font-family:'Bricolage Grotesque';font-weight:600;color:#fff;font-size:18px;margin-bottom:7px}
+.note-tile p{color:var(--muted);font-size:15px;line-height:1.5}
+.note-tile b{color:var(--powder-bright);font-weight:600}
+@media(max-width:860px){.price-wrap{grid-template-columns:1fr}}
 
 .book{background:linear-gradient(160deg,var(--navy-mid),var(--navy-deep));border:1px solid rgba(167,204,230,.2);border-radius:24px;padding:70px;text-align:center}
 .book h2{font-size:clamp(38px,6vw,76px);color:#fff;margin-bottom:18px}
