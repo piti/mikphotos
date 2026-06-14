@@ -7,12 +7,15 @@ const SRC = '/Users/peter/macs-shareable/mik_photos';
 const ASSETS = '/Users/peter/dev/mikphotos/src/assets/photos';
 const DATA = '/Users/peter/dev/mikphotos/src/data';
 mkdirSync(join(ASSETS, 'hero'), { recursive: true });
+mkdirSync(join(ASSETS, 'about'), { recursive: true });
 mkdirSync(DATA, { recursive: true });
 
 // role: 'hero-main' | 'hero-inset' | 'gallery'
 const HERO = [
-  { folder: 'PNW_trip_april_2026', file: 'DSCF0359.JPG', role: 'hero-main', out: 'hero/hero-main' },
-  { folder: 'Owen session',        file: 'DSCF0096.JPG', role: 'hero-inset', out: 'hero/hero-inset' },
+  { folder: 'PNW_trip_april_2026', file: 'DSCF0359.JPG',         role: 'hero-main',  out: 'hero/hero-main' },
+  { folder: 'Owen session',        file: 'DSCF0096.JPG',         role: 'hero-inset', out: 'hero/hero-inset' },
+  // Mik himself, on the PNW coast — used in the About section.
+  { folder: 'PNW_trip_april_2026', file: '20260405_195004.jpg', role: 'about',      out: 'about/about-mik' },
 ];
 
 // Display order interleaves portraits + outdoor for visual rhythm in the "All" view.
@@ -50,9 +53,9 @@ async function opt(srcPath, outBase, maxEdge, q) {
 }
 
 for (const h of HERO) {
-  const max = h.role === 'hero-main' ? 2400 : 1300;
+  const max = h.role === 'hero-main' ? 2400 : 1400;
   const r = await opt(join(SRC, h.folder, h.file), h.out, max, 82);
-  console.log(`hero ${h.role}: ${r.w}x${r.h}`);
+  console.log(`${h.role}: ${r.w}x${r.h}`);
 }
 
 const manifest = [];

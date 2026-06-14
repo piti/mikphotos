@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import heroMain from '../assets/photos/hero/hero-main.jpg';
 import heroInset from '../assets/photos/hero/hero-inset.jpg';
+import aboutMik from '../assets/photos/about/about-mik.jpg';
 import photos from '../data/photos.json';
 
 // Join the manifest with the optimized image modules.
@@ -82,7 +83,7 @@ const packages = [
 </div></section>
 
 <section id="about"><div class="wrap about">
-  <div class="about-img"><Image src={gallery.find((g) => g.category === 'portraits').img} alt="On a shoot" widths={[500, 900]} sizes="(max-width:860px) 90vw, 45vw" /></div>
+  <div class="about-img"><Image src={aboutMik} alt="Mik on the Pacific Northwest coast" widths={[500, 900]} sizes="(max-width:860px) 90vw, 45vw" /></div>
   <div>
     <div class="kick">02 / The photographer</div>
     <h2>Hey, I'm <span class="powder">Mik</span>.</h2>
