@@ -1,30 +1,61 @@
 # Mik Photography
 
-Website for Mik's outdoor photography business. Custom-built, navy + powder-blue brand.
+Website for Mik's outdoor & portrait photography business. Custom-built in **Astro**,
+navy + powder-blue brand ("Bold Navy" design direction).
 
-- **Code** lives here in `~/dev/mikphotos`, deployed via GitHub.
+- **Code** lives here in `~/dev/mikphotos`, deployed via GitHub Actions → GitHub Pages.
 - **Research / decisions / dispatch** live in the vault at `~/vault/projects/mikphotos`.
+- **Live:** https://piti.github.io/mikphotos/
 
-## Status
+## Stack
 
-Currently at the **design-mockup** stage. Three single-page directions are in `mockups/`:
+- [Astro](https://astro.build) 5 — static output, built-in image optimization (WebP/AVIF, responsive `srcset`).
+- Fonts: Bricolage Grotesque (display) + Hanken Grotesk (body).
+- Deployed by `.github/workflows/deploy.yml` on every push to `main`.
 
-| | Direction | Feel |
-|---|---|---|
-| A | `mockups/editorial.html` | Editorial Minimal — timeless, gallery |
-| B | `mockups/bold-navy.html` | Bold Navy — premium, moody |
-| C | `mockups/airy.html` | Airy & Friendly — warm, approachable |
+## Structure
 
-`index.html` is a chooser linking to all three. All use placeholder imagery (picsum.photos)
-and a placeholder booking slot.
+```
+src/
+  pages/index.astro      ← the single-page site (Bold Navy)
+  assets/photos/         ← web-optimized photos committed to the repo
+    hero/                ← hero-main.jpg, hero-inset.jpg
+    g-NN-*.jpg           ← gallery images
+  data/photos.json       ← gallery manifest (src + category + caption, in display order)
+public/mockups/          ← archived original design mockups (A/B/C)
+scripts/                 ← local image tooling (not part of the build)
+  contact-sheets.mjs     ← labeled contact sheets for curating from the photo source
+  sheet-paged.mjs        ← paged contact sheets for large folders
+  optimize.mjs           ← produces src/assets/photos/* + data/photos.json
+```
 
-## Next steps (after a direction is picked)
+## Working with photos
 
-1. Rebuild the chosen direction in **Astro** (static, image-optimized).
-2. Wire real photos (Syncthing folder → macmini).
-3. Embed booking (Cal.diy on Hostinger VPS, or TidyCal).
-4. Deploy via GitHub Pages / Vercel.
+Source photos live outside the repo in the Syncthing folder
+`~/macs-shareable/mik_photos/` (originals, untouched). To re-curate:
+
+1. `node scripts/contact-sheets.mjs` → review `/tmp/mik-sheets/*.jpg`, note indices.
+2. Edit the selection arrays in `scripts/optimize.mjs`.
+3. `npm run optimize` → regenerates `src/assets/photos/` + `src/data/photos.json`.
+4. `npm run build` to preview, commit, push (Actions deploys).
+
+To swap a single gallery photo, replace its entry in `optimize.mjs` (folder + filename
+from a contact sheet) and re-run `npm run optimize`.
+
+## Local dev
+
+```
+npm install
+npm run dev      # http://localhost:4321/mikphotos/
+npm run build    # outputs dist/
+```
+
+## Booking
+
+A booking slot is wired in the `#book` section (`src/pages/index.astro`, `#booking` div).
+Drop a TidyCal (or Cal.diy) embed snippet into that block. Pending decision: TidyCal agency
+account + team for Mik vs. a personal TidyCal license vs. self-hosted Cal.diy.
 
 ## Palette
 
-- Navy `#16294D` · Powder blue `#BCD4E6` · Soft white `#F7F9FB` · Charcoal `#1F2733`
+- Navy `#16294D` · Navy deep `#0B1730` · Powder `#BCD4E6` · Powder bright `#A7CCE6` · Mist `#F2F6FA`

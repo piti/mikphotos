@@ -1,0 +1,266 @@
+---
+import { Image } from 'astro:assets';
+import heroMain from '../assets/photos/hero/hero-main.jpg';
+import heroInset from '../assets/photos/hero/hero-inset.jpg';
+import photos from '../data/photos.json';
+
+// Join the manifest with the optimized image modules.
+const mods = import.meta.glob('../assets/photos/*.jpg', { eager: true });
+const byName = Object.fromEntries(
+  Object.entries(mods).map(([p, m]) => [p.split('/').pop(), m.default])
+);
+const gallery = photos.map((p) => ({ ...p, img: byName[p.src] }));
+
+const catLabels = { all: 'All', portraits: 'Portraits', outdoor: 'Outdoor & Nature' };
+const cats = ['all', ...Array.from(new Set(photos.map((p) => p.category)))];
+
+const packages = [
+  { tag: 'Mini', name: 'The Quick One', price: '$95', unit: '/session', feat: false,
+    items: ['30 minutes, one location', '15+ edited photos', 'Online gallery', 'Print-ready files'] },
+  { tag: 'Most booked', name: 'The Session', price: '$165', unit: '/session', feat: true,
+    items: ['60 minutes, up to 2 people', '40+ edited photos', 'Gallery + downloads', 'Outfit & location guide'] },
+  { tag: 'Event', name: 'On Location', price: '$240', unit: '+', feat: false,
+    items: ['2 hours coverage', '80+ edited photos', '48hr turnaround', 'Custom for your event'] },
+];
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mik Photography — Outdoor & Portrait Photography</title>
+<meta name="description" content="Mik is an outdoor and portrait photographer capturing people and places in real, natural light — on location, year-round." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="#top">MIK<span>.</span></a>
+  <div class="navlinks">
+    <a href="#work">Work</a><a href="#about">About</a><a href="#packages">Packages</a>
+    <a href="#book" class="book-btn">Book a session</a>
+  </div>
+</div></nav>
+
+<header id="top"><div class="wrap hero">
+  <div>
+    <div class="kick">Outdoor &amp; portrait photography</div>
+    <h1>Shot in<br><span class="out">the wild</span><br>light.</h1>
+    <p>Mik captures people and places in real, natural light — on location, on your terms. Bold outdoor portraits with a calm, cinematic edge.</p>
+    <div class="hero-cta">
+      <a href="#book" class="btn-primary">Book a session →</a>
+      <a href="#work" class="btn-ghost">See the work</a>
+    </div>
+  </div>
+  <div class="hero-stack">
+    <figure class="hs1 float"><Image src={heroMain} alt="Outdoor session in golden light" widths={[600, 1000, 1600]} sizes="(max-width:860px) 90vw, 40vw" /></figure>
+    <figure class="hs2"><Image src={heroInset} alt="Golden hour portrait" widths={[300, 600]} sizes="(max-width:860px) 40vw, 18vw" /></figure>
+  </div>
+</div></header>
+
+<div class="marq"><div class="marq-track">
+  <b>Portraits</b><span>✦</span><b>Nature</b><span>✦</span><b>Senior sessions</b><span>✦</span><b>Couples</b><span>✦</span><b>Golden hour</b><span>✦</span>
+  <b>Portraits</b><span>✦</span><b>Nature</b><span>✦</span><b>Senior sessions</b><span>✦</span><b>Couples</b><span>✦</span><b>Golden hour</b><span>✦</span>
+</div></div>
+
+<section id="work"><div class="wrap">
+  <div class="shead"><div class="kick">01 / Galleries</div><h2>Selected work</h2></div>
+  <div class="cats">
+    {cats.map((c, i) => (
+      <button class={i === 0 ? 'on' : ''} data-filter={c}>{catLabels[c] ?? c}</button>
+    ))}
+  </div>
+  <div class="gal">
+    {gallery.map((g) => (
+      <figure data-cat={g.category}>
+        <Image src={g.img} alt={g.caption} widths={[400, 700, 1100]} sizes="(max-width:560px) 100vw, (max-width:900px) 50vw, 33vw" />
+        <figcaption>{g.caption}</figcaption>
+      </figure>
+    ))}
+  </div>
+</div></section>
+
+<section id="about"><div class="wrap about">
+  <div class="about-img"><Image src={gallery.find((g) => g.category === 'portraits').img} alt="On a shoot" widths={[500, 900]} sizes="(max-width:860px) 90vw, 45vw" /></div>
+  <div>
+    <div class="kick">02 / The photographer</div>
+    <h2>Hey, I'm <span class="powder">Mik</span>.</h2>
+    <p>I started shooting outside because that's where everything feels real. No studio, no stiff poses — just you, a good location, and the kind of light you can't fake.</p>
+    <p>I keep sessions easy and a little fun, then turn around a polished gallery fast. Senior portraits, couples, families, outdoor adventures and local events all welcome.</p>
+  </div>
+</div></section>
+
+<section id="packages"><div class="wrap">
+  <div class="shead"><div class="kick">03 / Sessions</div><h2>Pick your session</h2></div>
+  <div class="pkgs">
+    {packages.map((p) => (
+      <div class={`pkg${p.feat ? ' feat' : ''}`}>
+        <div class="tag">{p.tag}</div>
+        <h3>{p.name}</h3>
+        <div class="price">{p.price}<span>{p.unit}</span></div>
+        <ul>{p.items.map((it) => <li>{it}</li>)}</ul>
+      </div>
+    ))}
+  </div>
+</div></section>
+
+<section id="book"><div class="wrap">
+  <div class="book">
+    <div class="kick" style="opacity:.9">04 / Let's shoot</div>
+    <h2>Book a session</h2>
+    <p>Grab a time and I'll lock in the spot &amp; the light. Sessions run year-round, weather permitting.</p>
+    {/* Booking embed slot — drop the TidyCal (or Cal.diy) embed snippet inside this block. */}
+    <div class="book-embed" id="booking">
+      <span>Booking calendar goes here — TidyCal embed</span>
+    </div>
+    <a href="#" class="btn-primary" id="book-cta">Check availability →</a>
+  </div>
+</div></section>
+
+<footer><div class="wrap foot">
+  <div class="brand">MIK<span style="color:var(--powder-bright)">.</span></div>
+  <div class="social"><a href="#">Instagram</a><a href="#">Email</a><a href="#">TikTok</a></div>
+  <small>© 2026 Mik Photography · Outdoor &amp; portrait photography · Built with Astro</small>
+</div></footer>
+
+<script>
+  // Sticky nav background
+  addEventListener('scroll', () =>
+    document.querySelector('nav').classList.toggle('scrolled', scrollY > 40)
+  );
+
+  // Reveal on scroll
+  const io = new IntersectionObserver(
+    (es) => es.forEach((e) => { if (e.isIntersecting) e.target.classList.add('in'); }),
+    { threshold: 0.1 }
+  );
+  document.querySelectorAll('section .wrap > *, .gal figure, .pkg').forEach((el, i) => {
+    el.classList.add('reveal');
+    el.style.transitionDelay = (i % 5 * 70) + 'ms';
+    io.observe(el);
+  });
+
+  // Functional category filter
+  const figures = Array.from(document.querySelectorAll('.gal figure'));
+  document.querySelectorAll('.cats button').forEach((b) => {
+    b.addEventListener('click', () => {
+      document.querySelector('.cats .on')?.classList.remove('on');
+      b.classList.add('on');
+      const f = b.dataset.filter;
+      figures.forEach((fig) => {
+        fig.style.display = f === 'all' || fig.dataset.cat === f ? '' : 'none';
+      });
+    });
+  });
+</script>
+</body>
+</html>
+
+<style is:global>
+:root{
+  --navy:#16294D; --navy-deep:#0B1730; --navy-mid:#1E3461; --powder:#BCD4E6;
+  --powder-bright:#A7CCE6; --paper:#F2F6FA; --muted:#8FA6C4;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--navy-deep);color:var(--paper);font-family:'Hanken Grotesk',sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,.disp{font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-.02em;line-height:.98}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1300px;margin:0 auto;padding:0 36px}
+.kick{font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--powder-bright);opacity:.85}
+
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:
+  radial-gradient(900px 600px at 75% -5%,rgba(167,204,230,.16),transparent 60%),
+  radial-gradient(700px 700px at 5% 100%,rgba(30,52,97,.6),transparent 60%),
+  var(--navy-deep)}
+body::after{content:"";position:fixed;inset:0;z-index:-1;opacity:.04;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.4s}
+nav.scrolled{background:rgba(11,23,48,.78);backdrop-filter:blur(14px);border-bottom:1px solid rgba(167,204,230,.14)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:84px}
+.brand{font-family:'Bricolage Grotesque';font-weight:800;font-size:26px;letter-spacing:-.03em;color:#fff}
+.brand span{color:var(--powder-bright)}
+.navlinks{display:flex;gap:36px;align-items:center;font-size:14px}
+.navlinks a{opacity:.8;transition:.25s}.navlinks a:hover{opacity:1;color:var(--powder-bright)}
+.book-btn{background:var(--powder);color:var(--navy-deep)!important;padding:12px 24px;border-radius:40px;font-weight:600;opacity:1!important;transition:.3s}
+.book-btn:hover{background:#fff;transform:translateY(-2px);box-shadow:0 10px 30px rgba(167,204,230,.25)}
+@media(max-width:820px){.navlinks a:not(.book-btn){display:none}}
+
+header{min-height:100vh;display:flex;align-items:center;position:relative;padding:120px 0 60px}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center;width:100%}
+.hero h1{font-size:clamp(54px,9vw,128px);font-weight:700;color:#fff}
+.hero h1 .out{-webkit-text-stroke:1.5px var(--powder-bright);color:transparent}
+.hero p{margin:32px 0 40px;max-width:420px;font-size:18px;color:var(--muted)}
+.hero-cta{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.btn-primary{background:var(--powder);color:var(--navy-deep);padding:16px 34px;border-radius:40px;font-weight:600;transition:.3s;display:inline-block}
+.btn-primary:hover{background:#fff;transform:translateY(-3px);box-shadow:0 14px 40px rgba(167,204,230,.3)}
+.btn-ghost{border:1px solid rgba(167,204,230,.4);padding:16px 30px;border-radius:40px;transition:.3s}
+.btn-ghost:hover{border-color:var(--powder);background:rgba(167,204,230,.08)}
+.hero-stack{position:relative;height:560px}
+.hero-stack figure{position:absolute;border-radius:14px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.hs1{width:78%;height:84%;top:0;right:0;z-index:2}
+.hs2{width:46%;height:50%;bottom:-10px;left:-12px;z-index:3;border:4px solid var(--navy-deep)}
+.float{animation:float 7s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+@media(max-width:860px){.hero{grid-template-columns:1fr}.hero-stack{height:420px;margin-top:20px}}
+
+.marq{border-top:1px solid rgba(167,204,230,.16);border-bottom:1px solid rgba(167,204,230,.16);padding:22px 0;overflow:hidden;white-space:nowrap}
+.marq-track{display:inline-block;animation:scroll 26s linear infinite;font-family:'Bricolage Grotesque';font-size:30px;font-weight:300;color:var(--powder)}
+.marq-track span{opacity:.4;margin:0 26px}
+.marq-track b{font-weight:600;color:#fff;margin:0 26px}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+section{padding:110px 0;position:relative}
+.shead{margin-bottom:54px}
+.shead h2{font-size:clamp(36px,6vw,72px);font-weight:700;color:#fff;margin-top:14px}
+
+.cats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
+.cats button{font-family:'Hanken Grotesk';background:rgba(167,204,230,.06);border:1px solid rgba(167,204,230,.2);color:var(--paper);padding:10px 22px;border-radius:40px;font-size:14px;cursor:pointer;transition:.25s}
+.cats button.on,.cats button:hover{background:var(--powder);color:var(--navy-deep);border-color:var(--powder)}
+.gal{columns:3;column-gap:18px}
+.gal figure{break-inside:avoid;margin-bottom:18px;border-radius:12px;overflow:hidden;position:relative}
+.gal figure img{transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.gal figure:hover img{transform:scale(1.06)}
+.gal figcaption{position:absolute;inset:auto 0 0 0;padding:18px;background:linear-gradient(transparent,rgba(11,23,48,.85));font-family:'Bricolage Grotesque';font-weight:500;font-size:16px;opacity:0;transition:.4s}
+.gal figure:hover figcaption{opacity:1}
+@media(max-width:900px){.gal{columns:2}}@media(max-width:560px){.gal{columns:1}}
+
+.about{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about-img{aspect-ratio:4/5;border-radius:16px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.about h2{font-size:clamp(34px,5vw,60px);color:#fff;margin-bottom:24px}
+.about p{color:var(--muted);font-size:18px;margin-bottom:18px;max-width:520px}
+.about .powder{color:var(--powder-bright)}
+@media(max-width:860px){.about{grid-template-columns:1fr}}
+
+.pkgs{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.pkg{background:linear-gradient(160deg,rgba(30,52,97,.5),rgba(11,23,48,.3));border:1px solid rgba(167,204,230,.18);border-radius:18px;padding:38px 32px;transition:.35s}
+.pkg:hover{transform:translateY(-6px);border-color:var(--powder);box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.pkg.feat{background:linear-gradient(160deg,var(--powder),#8fbfe0);color:var(--navy-deep)}
+.pkg .tag{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--powder-bright)}
+.pkg.feat .tag{color:var(--navy-mid)}
+.pkg h3{font-size:26px;color:#fff;margin:10px 0 6px}.pkg.feat h3{color:var(--navy-deep)}
+.pkg .price{font-family:'Bricolage Grotesque';font-size:48px;font-weight:700;color:var(--powder-bright);margin:14px 0 22px}
+.pkg.feat .price{color:var(--navy-deep)}
+.pkg .price span{font-size:15px;font-family:'Hanken Grotesk';opacity:.6}
+.pkg ul{list-style:none}.pkg li{padding:10px 0;border-top:1px solid rgba(167,204,230,.16);font-size:15px;color:var(--paper)}
+.pkg.feat li{color:var(--navy-mid);border-color:rgba(11,23,48,.14)}
+@media(max-width:860px){.pkgs{grid-template-columns:1fr}}
+
+.book{background:linear-gradient(160deg,var(--navy-mid),var(--navy-deep));border:1px solid rgba(167,204,230,.2);border-radius:24px;padding:70px;text-align:center}
+.book h2{font-size:clamp(38px,6vw,76px);color:#fff;margin-bottom:18px}
+.book p{color:var(--muted);max-width:480px;margin:0 auto 34px;font-size:18px}
+.book-embed{background:rgba(167,204,230,.05);border:1px dashed rgba(167,204,230,.4);border-radius:14px;padding:46px;color:var(--powder);font-family:'Bricolage Grotesque';font-weight:300;margin-bottom:30px}
+@media(max-width:680px){.book{padding:44px 26px}}
+
+footer{padding:80px 0 50px;border-top:1px solid rgba(167,204,230,.16)}
+.foot{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px}
+.foot .brand{font-size:48px}
+.social{display:flex;gap:24px;font-size:14px;color:var(--muted)}
+.social a:hover{color:var(--powder-bright)}
+.foot small{width:100%;color:var(--muted);opacity:.6;font-size:12px;margin-top:30px}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 1s,transform 1s}.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.float{animation:none}.marq-track{animation:none}.reveal{transition:none;opacity:1;transform:none}}
+</style>

@@ -1,0 +1,128 @@
+[
+  {
+    "src": "g-01-golden-hour-the-long-light.jpg",
+    "category": "portraits",
+    "caption": "Golden hour, the long light",
+    "w": 1600,
+    "h": 1067
+  },
+  {
+    "src": "g-02-beneath-the-redwoods.jpg",
+    "category": "outdoor",
+    "caption": "Beneath the redwoods",
+    "w": 1600,
+    "h": 1067
+  },
+  {
+    "src": "g-03-sun-flare-summer-field.jpg",
+    "category": "portraits",
+    "caption": "Sun flare, summer field",
+    "w": 1067,
+    "h": 1600
+  },
+  {
+    "src": "g-04-waterfall-pacific-northwest.jpg",
+    "category": "outdoor",
+    "caption": "Waterfall, Pacific Northwest",
+    "w": 1067,
+    "h": 1600
+  },
+  {
+    "src": "g-05-wildflowers-at-dusk.jpg",
+    "category": "portraits",
+    "caption": "Wildflowers at dusk",
+    "w": 1067,
+    "h": 1600
+  },
+  {
+    "src": "g-06-where-the-coast-meets-the-light.jpg",
+    "category": "outdoor",
+    "caption": "Where the coast meets the light",
+    "w": 1067,
+    "h": 1600
+  },
+  {
+    "src": "g-07-two-friends-golden-field.jpg",
+    "category": "portraits",
+    "caption": "Two friends, golden field",
+    "w": 1067,
+    "h": 1600
+  },
+  {
+    "src": "g-08-fog-on-the-headland.jpg",
+    "category": "outdoor",
+    "caption": "Fog on the headland",
+    "w": 1067,
+    "h": 1600
+  },
+  {
+    "src": "g-09-a-quiet-portrait.jpg",
+    "category": "portraits",
+    "caption": "A quiet portrait",
+    "w": 1067,
+    "h": 1600
+  },
+  {
+    "src": "g-10-caught-laughing.jpg",
+    "category": "portraits",
+    "caption": "Caught laughing",
+    "w": 1067,
+    "h": 1600
+  },
+  {
+    "src": "g-11-falling-water-long-exposure.jpg",
+    "category": "outdoor",
+    "caption": "Falling water, long exposure",
+    "w": 1067,
+    "h": 1600
+  },
+  {
+    "src": "g-12-movement-in-the-grass.jpg",
+    "category": "portraits",
+    "caption": "Movement in the grass",
+    "w": 1067,
+    "h": 1600
+  },
+  {
+    "src": "g-13-evening-warmth.jpg",
+    "category": "portraits",
+    "caption": "Evening warmth",
+    "w": 1067,
+    "h": 1600
+  },
+  {
+    "src": "g-14-the-scale-of-old-growth.jpg",
+    "category": "outdoor",
+    "caption": "The scale of old growth",
+    "w": 1600,
+    "h": 1067
+  },
+  {
+    "src": "g-15-last-light-through-the-trees.jpg",
+    "category": "portraits",
+    "caption": "Last light through the trees",
+    "w": 1067,
+    "h": 1600
+  },
+  {
+    "src": "g-16-under-the-oak.jpg",
+    "category": "portraits",
+    "caption": "Under the oak",
+    "w": 1067,
+    "h": 1600
+  },
+  {
+    "src": "g-17-a-thread-of-water.jpg",
+    "category": "outdoor",
+    "caption": "A thread of water",
+    "w": 1067,
+    "h": 1600
+  },
+  {
+    "src": "g-18-walking-the-field.jpg",
+    "category": "portraits",
+    "caption": "Walking the field",
+    "w": 1067,
+    "h": 1600
+  }
+]
