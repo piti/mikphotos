@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import Logo from '../components/Logo.astro';
 import heroMain from '../assets/photos/hero/hero-main.jpg';
 import heroInset from '../assets/photos/hero/hero-inset.jpg';
 import aboutMik from '../assets/photos/about/about-mik.jpg';
@@ -41,13 +42,16 @@ const notes = [
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Mik Photography — Outdoor & Portrait Photography</title>
 <meta name="description" content="Mik is an outdoor and portrait photographer capturing people and places in real, natural light — on location, year-round." />
+<link rel="icon" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.svg`} type="image/svg+xml" />
+<link rel="apple-touch-icon" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/apple-touch-icon.png`} />
+<meta name="theme-color" content="#0B1730" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
 </head>
 <body>
 <nav><div class="wrap">
-  <a class="brand" href="#top">MIK<span>.</span></a>
+  <a class="brand" href="#top"><Logo size={36} /><span class="logo-word">Mik</span></a>
   <div class="navlinks">
     <a href="#work">Work</a><a href="#about">About</a><a href="#packages">Packages</a>
     <a href="#book" class="book-btn">Book a session</a>
@@ -141,7 +145,7 @@ const notes = [
 </div></section>
 
 <footer><div class="wrap foot">
-  <div class="brand">MIK<span style="color:var(--powder-bright)">.</span></div>
+  <div class="brand"><Logo size={44} /><span class="logo-word">Mik</span></div>
   <div class="social"><a href="https://www.instagram.com/miktakesflicks" target="_blank" rel="noopener">Instagram ↗ @miktakesflicks</a></div>
   <small>© 2026 Mik Photography · Outdoor &amp; portrait photography · Built with Astro</small>
 </div></footer>
@@ -205,8 +209,9 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;opacity:.04;pointer-eve
 nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.4s}
 nav.scrolled{background:rgba(11,23,48,.78);backdrop-filter:blur(14px);border-bottom:1px solid rgba(167,204,230,.14)}
 nav .wrap{display:flex;align-items:center;justify-content:space-between;height:84px}
-.brand{font-family:'Bricolage Grotesque';font-weight:800;font-size:26px;letter-spacing:-.03em;color:#fff}
-.brand span{color:var(--powder-bright)}
+.brand{display:inline-flex;align-items:center;gap:11px;font-family:'Bricolage Grotesque';font-weight:800;letter-spacing:-.03em;color:#fff}
+.logo-mark{display:block;flex:none;filter:drop-shadow(0 4px 12px rgba(0,0,0,.35))}
+.logo-word{font-size:26px;line-height:1}
 .navlinks{display:flex;gap:36px;align-items:center;font-size:14px}
 .navlinks a{opacity:.8;transition:.25s}.navlinks a:hover{opacity:1;color:var(--powder-bright)}
 .book-btn{background:var(--powder);color:var(--navy-deep)!important;padding:12px 24px;border-radius:40px;font-weight:600;opacity:1!important;transition:.3s}
@@ -290,7 +295,7 @@ section{padding:110px 0;position:relative}
 
 footer{padding:80px 0 50px;border-top:1px solid rgba(167,204,230,.16)}
 .foot{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px}
-.foot .brand{font-size:48px}
+.foot .brand .logo-word{font-size:36px}
 .social{display:flex;gap:24px;font-size:14px;color:var(--muted)}
 .social a:hover{color:var(--powder-bright)}
 .foot small{width:100%;color:var(--muted);opacity:.6;font-size:12px;margin-top:30px}

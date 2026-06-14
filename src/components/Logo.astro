@@ -1,0 +1,26 @@
+---
+// Camera-patch logo mark — vectorized from Mik's embroidered camera patch.
+// Powder "patch" tile with a navy SLR camera; reads cleanly down to ~24px.
+interface Props { size?: number }
+const { size = 32 } = Astro.props;
+---
+<svg class="logo-mark" width={size} height={size} viewBox="0 0 64 64" fill="none"
+     role="img" aria-label="Mik Photography camera logo">
+  <rect x="1.5" y="1.5" width="61" height="61" rx="16" fill="url(#mik-tile)" stroke="rgba(11,23,48,.12)"/>
+  <g fill="#0B1730">
+    <path d="M25 22 l2.4-6.2 h9.2 L43 22 Z"/>
+    <rect x="28.5" y="12.5" width="7" height="3.4" rx="1"/>
+    <rect x="11" y="22" width="42" height="27" rx="5"/>
+  </g>
+  <circle cx="32" cy="36" r="10.5" fill="#BCD4E6"/>
+  <circle cx="32" cy="36" r="7" fill="#0B1730"/>
+  <circle cx="32" cy="36" r="3" fill="#6F9CC0"/>
+  <circle cx="29.6" cy="33.6" r="1.5" fill="#E7F1F8"/>
+  <circle cx="17.5" cy="28" r="2" fill="#BCD4E6"/>
+  <rect x="44" y="18.4" width="5" height="3.2" rx="1" fill="#BCD4E6"/>
+  <defs>
+    <linearGradient id="mik-tile" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#CFE2F0"/><stop offset="1" stop-color="#9CC2DE"/>
+    </linearGradient>
+  </defs>
+</svg>
